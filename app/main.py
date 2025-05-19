@@ -2,7 +2,8 @@ from datetime import datetime
 from app.customer import Customer
 from app.shop import Shop
 
-def shop_trip():
+
+def shop_trip() -> None:
     import json
 
     with open("app/config.json") as file:
@@ -41,9 +42,10 @@ def shop_trip():
                 cheapest_shop = shop
 
         if cheapest_cost <= customer.money:
-            print(f"{customer.name} rides to {cheapest_shop.name}")
             customer.location = cheapest_shop.location
-            print(f"\nDate: {datetime.now().strftime('%m/%d/%Y %H:%M:%S')}")
+
+            print(f"{customer.name} rides to {cheapest_shop.name}")
+            print(f"\nDate: {datetime.now().strftime("%m/%d/%Y %H:%M:%S")}")
             print(f"Thanks, {customer.name}, for your purchase!")
             print("You have bought:")
 
@@ -57,9 +59,12 @@ def shop_trip():
             customer.money -= total_cost
 
             print(f"\n{customer.name} rides home")
-            print(f"{customer.name} now has {round(customer.money, 2)} dollars")
+            print(f"{customer.name} now"
+                  f" has {round(customer.money, 2)} dollars")
         else:
-            print(f"{customer.name} doesn't have enough money to make a purchase in any shop")
+            print(f"{customer.name} doesn't have "
+                  f"enough money to make a purchase in any shop")
+
 
 if __name__ == "__main__":
     shop_trip()
